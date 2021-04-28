@@ -7,10 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -73,18 +70,22 @@ public class JobData {
         loadData();
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        ArrayList<HashMap<String, String>> allJobsInput = allJobs;
 
-        for (HashMap<String, String> row : allJobs) {
-
+        for (HashMap<String, String> row : allJobsInput) {
             String aValue = row.get(column);
+
 
             if (aValue.toLowerCase(Locale.ROOT).contains(value.toLowerCase(Locale.ROOT))) {
                 jobs.add(row);
             }
         }
+
         if(jobs.size() <= 0 ){
             System.out.println("There is no data for this entry, please try again!");
         }
+
+//        System.out.println(jobs.get(1).get(column));
 
         return jobs;
     }
@@ -94,8 +95,9 @@ public class JobData {
         loadData();
 
         ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+        ArrayList<HashMap<String, String>> allJobsInput = allJobs;
 
-        for (HashMap<String, String> row : allJobs) {
+        for (HashMap<String, String> row : allJobsInput) {
 
             for (String str : row.values()) {
                 if(str.toLowerCase(Locale.ROOT).contains(value.toLowerCase(Locale.ROOT)) && !jobs.contains(row)){
